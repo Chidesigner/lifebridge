@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { UserRound, FileText } from 'lucide-react'
+import { UserRound, FileText, ClipboardCheck } from 'lucide-react'
 import { supabase } from '../../lib/supabaseClient'
 import { useAuth } from '../../context/AuthContext'
 import HospitalNav from '../../components/HospitalNav'
@@ -139,7 +139,8 @@ function MyRecords() {
       <HospitalNav />
 
       <main className="page-content p-8">
-        <h1 className="text-xl font-semibold text-brand-navy">My Records</h1>
+        <div className="page-eyebrow"><ClipboardCheck size={13} /> RECORD MANAGEMENT</div>
+        <h1 className="text-xl font-semibold text-brand-navy">Records from your facility</h1>
         <p className="mt-1 text-sm text-gray-500">
           Patient records your hospital has uploaded. NIN can't be changed after upload —
           if it was entered incorrectly, ask an admin about correcting it directly in the database.
