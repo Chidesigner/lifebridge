@@ -9,52 +9,97 @@ export function AuthProvider({ children }) {
   const [hospital, setHospital] = useState(null)
   const [isAdmin, setIsAdmin] = useState(false)
 
-  async function loadRole(currentUser) {
+  // Resolve a user's role without mutating React state inside the
+  // asynchronous data-fetching function. The caller can ignore stale
+  // results if a newer auth event arrives first.
+  async function resolveRole(currentUser) {
     if (!currentUser) {
-      setIsAdmin(false)
-      setHospital(null)
-      return
+      return { isAdmin: false, hospital: null }
     }
 
-    const { data: adminRow } = await supabase
+    const { data: adminRow, error: adminError } = await supabase
       .from('admin_users')
       .select('admin_id')
       .eq('user_id', currentUser.id)
       .maybeSingle()
 
-    if (adminRow) {
-      setIsAdmin(true)
-      setHospital(null)
-      return
+    if (adminError) {
+      throw adminError
     }
 
-    setIsAdmin(false)
+    if (adminRow) {
+      return { isAdmin: true, hospital: null }
+    }
 
-    const { data: hospitalRow } = await supabase
+    const { data: hospitalRow, error: hospitalError } = await supabase
       .from('hospitals')
       .select('*')
       .eq('user_id', currentUser.id)
       .maybeSingle()
 
-    setHospital(hospitalRow ?? null)
+    if (hospitalError) {
+      throw hospitalError
+    }
+
+    return { isAdmin: false, hospital: hospitalRow ?? null }
   }
 
   useEffect(() => {
     let isMounted = true
+    let authVersion = 0
 
-    supabase.auth.getSession().then(async ({ data: { session } }) => {
+    // Keep the onAuthStateChange callback synchronous. Supabase warns
+    // that awaiting Supabase client calls inside this callback can cause
+    // a lock/deadlock. Defer role queries until after the callback returns.
+    function applySession(currentUser) {
+      const version = ++authVersion
+      setUser(currentUser)
+
+      window.setTimeout(() => {
+        if (!isMounted || version !== authVersion) return
+
+        void (async () => {
+          try {
+            const role = await resolveRole(currentUser)
+            if (!isMounted || version !== authVersion) return
+
+            setIsAdmin(role.isAdmin)
+            setHospital(role.hospital)
+          } catch (error) {
+            console.error('Could not resolve the signed-in user role.', error)
+            if (!isMounted || version !== authVersion) return
+
+            setIsAdmin(false)
+            setHospital(null)
+          } finally {
+            if (isMounted && version === authVersion) {
+              setLoading(false)
+            }
+          }
+        })()
+      }, 0)
+    }
+
+    // Load persisted session outside the auth callback. Auth events can
+    // also arrive here; the version counter prevents stale role lookups
+    // from overwriting state for a newer login/logout event.
+    supabase.auth.getSession().then(({ data: { session }, error }) => {
       if (!isMounted) return
-      setUser(session?.user ?? null)
-      await loadRole(session?.user ?? null)
-      setLoading(false)
+
+      if (error) {
+        console.error('Could not restore the saved session.', error)
+      }
+      applySession(session?.user ?? null)
+    }).catch((error) => {
+      if (!isMounted) return
+      console.error('Could not restore the saved session.', error)
+      applySession(null)
     })
 
     const { data: listener } = supabase.auth.onAuthStateChange(
-      async (_event, session) => {
+      (_event, session) => {
         if (!isMounted) return
-        setUser(session?.user ?? null)
-        await loadRole(session?.user ?? null)
-        setLoading(false)
+        applySession(session?.user ?? null)
       }
     )
 
