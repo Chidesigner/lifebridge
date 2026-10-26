@@ -1,18 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { HeartPulse } from 'lucide-react'
+import { HeartPulse, ShieldCheck, Activity } from 'lucide-react'
 
-/**
- * Shared two-column layout for the Register and Login pages: a brand
- * panel on the left (hidden on small screens), the actual form on the
- * right. Pulled out once so both pages stay visually identical
- * without duplicating this markup.
- *
- * The form card fades and rises in once on mount — a small, cheap
- * touch of polish for a page every hospital sees on day one. This is
- * a mount transition (not scroll-triggered like Reveal), since the
- * card is already above the fold.
- */
 function AuthLayout({ title, subtitle, children }) {
   const [visible, setVisible] = useState(false)
 
@@ -22,41 +11,57 @@ function AuthLayout({ title, subtitle, children }) {
   }, [])
 
   return (
-    <div className="flex min-h-screen">
-      <div className="hidden w-1/2 flex-col justify-between bg-brand-navy p-12 text-white md:flex">
-        <Link to="/" className="flex items-center gap-2 text-lg font-bold">
-          <HeartPulse className="h-6 w-6" />
-          LifeBridge
+    <div className="auth-shell">
+      <section className="auth-brand-panel">
+        <Link to="/" className="app-brand" style={{ padding: 0, color: '#f9ffff' }}>
+          <span className="app-brand-mark"><HeartPulse size={23} /></span>
+          <span className="app-brand-copy">
+            <span className="app-brand-name">LifeBridge</span>
+            <span className="app-brand-caption" style={{ color: '#9ab9c7' }}>Connected care, considered.</span>
+          </span>
         </Link>
-        <div>
-          <blockquote className="font-display text-2xl font-medium leading-snug">
-            "One record, every hospital, the moment it matters."
-          </blockquote>
-          <p className="mt-4 text-sm text-white/70">
-            Cross-facility patient records for the Nsukka, Enugu case study area.
-          </p>
-        </div>
-        <p className="text-xs text-white/50">© LifeBridge</p>
-      </div>
 
-      <div className="flex w-full flex-col items-center justify-center bg-gray-50 px-4 py-12 md:w-1/2">
-        <div className="w-full max-w-md">
-          <Link to="/" className="mb-6 flex items-center gap-2 text-lg font-bold text-brand-navy md:hidden">
-            <HeartPulse className="h-6 w-6" />
-            LifeBridge
-          </Link>
-          <div
-            className={
-              'rounded-lg border border-gray-200 bg-white p-8 shadow-sm transition-all duration-500 ease-out motion-reduce:transition-none ' +
-              (visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3')
-            }
-          >
-            <h1 className="text-xl font-semibold text-brand-navy">{title}</h1>
-            {subtitle && <p className="mt-1 text-sm text-gray-500">{subtitle}</p>}
-            <div className="mt-6">{children}</div>
+        <div className="auth-brand-quote">
+          <span className="auth-brand-overline"><Activity size={14} /> Connected clinical intelligence</span>
+          <h2>Every detail matters.<br />Every <em>connection</em> counts.</h2>
+          <p>
+            A considered workspace for verified hospitals to contribute and find patient records
+            across the LifeBridge network, with accountability built into every lookup.
+          </p>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10, marginTop: 25 }}>
+            <span style={{ display: 'inline-flex', alignItems: 'center', gap: 7, border: '1px solid rgba(168,230,219,.18)', borderRadius: 999, padding: '9px 12px', color: '#d1e9e8', fontSize: 10 }}>
+              <ShieldCheck size={13} color="#8ce0d0" /> Verified facilities
+            </span>
+            <span style={{ display: 'inline-flex', alignItems: 'center', gap: 7, border: '1px solid rgba(168,230,219,.18)', borderRadius: 999, padding: '9px 12px', color: '#d1e9e8', fontSize: 10 }}>
+              <Activity size={13} color="#8ce0d0" /> Accountable access
+            </span>
           </div>
         </div>
-      </div>
+
+        <p className="auth-brand-foot">A cross-facility health information project · Nsukka, Enugu</p>
+      </section>
+
+      <section className="auth-form-side">
+        <div className="auth-form-wrap">
+          <Link to="/" className="site-logo" style={{ marginBottom: 23 }}>
+            <span className="site-logo-mark"><HeartPulse size={20} /></span>
+            <span>
+              <span className="site-logo-word">LifeBridge</span>
+              <span className="site-logo-tagline">A connected-care network</span>
+            </span>
+          </Link>
+
+          <div className={'auth-card transition-all duration-500 ease-out motion-reduce:transition-none ' + (visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3')}>
+            <div className="page-eyebrow"><ShieldCheck size={13} /> Secure workspace</div>
+            <h1>{title}</h1>
+            {subtitle && <p className="auth-subtitle">{subtitle}</p>}
+            {children}
+          </div>
+          <p style={{ marginTop: 20, color: '#94a3ad', fontSize: 10, lineHeight: 1.8, textAlign: 'center' }}>
+            LifeBridge access is intended for registered facilities and the system administrator.
+          </p>
+        </div>
+      </section>
     </div>
   )
 }
