@@ -44,9 +44,9 @@ function Hospitals() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="app-shell min-h-screen">
       <AdminNav />
-      <main className="p-8">
+      <main className="page-content p-8">
         <h1 className="text-xl font-semibold text-brand-navy">Hospitals</h1>
         <p className="mt-1 text-sm text-gray-500">Approve a hospital to give it access to LifeBridge, or revoke access at any time.</p>
         {error && <div className="mt-4 rounded-md border border-brand-red/30 bg-red-50 px-3 py-2 text-sm text-brand-red">{error}</div>}
