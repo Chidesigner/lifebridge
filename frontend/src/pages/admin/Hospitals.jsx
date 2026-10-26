@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Building2 } from 'lucide-react'
+import { Building2, ShieldCheck } from 'lucide-react'
 import { supabase } from '../../lib/supabaseClient'
 import AdminNav from '../../components/AdminNav'
 import Spinner from '../../components/Spinner'
@@ -47,7 +47,8 @@ function Hospitals() {
     <div className="app-shell min-h-screen">
       <AdminNav />
       <main className="page-content p-8">
-        <h1 className="text-xl font-semibold text-brand-navy">Hospitals</h1>
+        <div className="page-eyebrow"><ShieldCheck size={13} /> FACILITY GOVERNANCE</div>
+        <h1 className="text-xl font-semibold text-brand-navy">Hospital registry</h1>
         <p className="mt-1 text-sm text-gray-500">Approve a hospital to give it access to LifeBridge, or revoke access at any time.</p>
         {error && <div className="mt-4 rounded-md border border-brand-red/30 bg-red-50 px-3 py-2 text-sm text-brand-red">{error}</div>}
         <div className="mt-6 overflow-hidden rounded-lg border border-gray-200 bg-white">
