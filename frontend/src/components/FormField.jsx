@@ -1,10 +1,13 @@
+import { useId } from 'react'
+
 /**
- * A single labeled form field: label, input/select/textarea, an
- * optional leading icon, and an error message beneath it. Every
- * field in the app gets the same spacing, focus ring, and error
- * styling from this one place.
+ * Shared, accessible field styling for inputs, selects and textareas.
+ * Labels are programmatically associated with their controls, and
+ * error states are consistently announced below the relevant field.
  */
-function FormField({ label, error, as = 'input', icon: Icon, children, ...inputProps }) {
+function FormField({ label, error, as = 'input', icon: Icon, children, id, ...inputProps }) {
+  const generatedId = useId()
+  const fieldId = id || generatedId
   const baseFieldClasses =
     'w-full rounded-md border px-3 py-2 text-sm text-gray-900 shadow-sm ' +
     'placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-offset-0 ' +
@@ -15,24 +18,24 @@ function FormField({ label, error, as = 'input', icon: Icon, children, ...inputP
 
   return (
     <div>
-      <label className="mb-1 block text-sm font-medium text-gray-700">
+      <label htmlFor={fieldId} className="mb-1 block text-sm font-medium text-gray-700">
         {label}
       </label>
       <div className="relative">
         {Icon && (
-          <Icon className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
+          <Icon className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" aria-hidden="true" />
         )}
         {as === 'select' ? (
-          <select className={baseFieldClasses} {...inputProps}>
+          <select id={fieldId} aria-invalid={Boolean(error)} className={baseFieldClasses} {...inputProps}>
             {children}
           </select>
         ) : as === 'textarea' ? (
-          <textarea className={baseFieldClasses} {...inputProps} />
+          <textarea id={fieldId} aria-invalid={Boolean(error)} className={baseFieldClasses} {...inputProps} />
         ) : (
-          <input className={baseFieldClasses} {...inputProps} />
+          <input id={fieldId} aria-invalid={Boolean(error)} className={baseFieldClasses} {...inputProps} />
         )}
       </div>
-      {error && <p className="mt-1 text-xs text-brand-red">{error}</p>}
+      {error && <p className="mt-1 text-xs text-brand-red" role="alert">{error}</p>}
     </div>
   )
 }
