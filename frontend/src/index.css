@@ -616,6 +616,7 @@ a { text-decoration: none; }
   :root { --sidebar-width: 0px; }
   .app-sidebar {
     position: sticky;
+    inset: 0 0 auto;
     top: 0;
     width: 100%;
     height: auto;
@@ -703,7 +704,8 @@ a { text-decoration: none; }
 
 
 /* Final layout refinements for workflow pages and responsive data-heavy views */
-.app-shell main.page-content { width: min(100%, 1060px); margin-right: auto; }
+.app-shell main.page-content { width: auto; max-width: 1060px; margin-right: auto; }
+.app-shell main.page-content.max-w-2xl { max-width: 760px; }
 .app-shell main form.rounded-lg {
   padding: clamp(20px, 2.5vw, 32px);
   border: 1px solid #e0e8ed;
@@ -758,4 +760,16 @@ a { text-decoration: none; }
 @media (max-width: 480px) {
   .app-shell main form .gap-3 { gap: 8px; }
   .app-shell main form button { white-space: nowrap; }
+}
+
+/* Correct high-specificity layout behavior for forms and compact lookups */
+.app-shell main.page-content.max-w-2xl { max-width: 760px; }
+.app-shell main .text-brand-green-dark { color: #08776f; }
+.app-shell main .bg-green-100 { background: #e1f5ed; }
+.app-shell main .text-brand-red { color: #b63d43; }
+.app-shell main form > div { min-width: 0; }
+.app-shell main .border-brand-red\/30 { border-color: #f0caca; }
+.app-shell main .hover\:bg-red-50:hover { background: #fff0ef; }
+@media (max-width: 740px) {
+  .app-shell main.page-content, .app-shell main.page-content.max-w-2xl { width: auto; max-width: none; }
 }
