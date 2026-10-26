@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { IdCard } from 'lucide-react'
+import { IdCard, UploadCloud } from 'lucide-react'
 import { supabase } from '../../lib/supabaseClient'
 import { useAuth } from '../../context/AuthContext'
 import HospitalNav from '../../components/HospitalNav'
@@ -80,7 +80,8 @@ function UploadRecord() {
       <HospitalNav />
 
       <main className="page-content mx-auto max-w-2xl p-8">
-        <h1 className="text-xl font-semibold text-brand-navy">Upload Patient Record</h1>
+        <div className="page-eyebrow"><UploadCloud size={13} /> RECORD MANAGEMENT</div>
+        <h1 className="text-xl font-semibold text-brand-navy">Create a patient record</h1>
         <p className="mt-1 text-sm text-gray-500">
           This record will be visible to every verified hospital that searches this patient's NIN.
         </p>
