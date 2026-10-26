@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Search as SearchIcon, UserRound, Building2, SearchX } from 'lucide-react'
+import { Search as SearchIcon, UserRound, Building2, SearchX, Network } from 'lucide-react'
 import { supabase } from '../../lib/supabaseClient'
 import HospitalNav from '../../components/HospitalNav'
 import FormField from '../../components/FormField'
@@ -48,7 +48,8 @@ function Search() {
       <HospitalNav />
 
       <main className="page-content mx-auto max-w-2xl p-8">
-        <h1 className="text-xl font-semibold text-brand-navy">Search by NIN</h1>
+        <div className="page-eyebrow"><Network size={13} /> CROSS-FACILITY LOOKUP</div>
+        <h1 className="text-xl font-semibold text-brand-navy">Find a patient</h1>
         <p className="mt-1 text-sm text-gray-500">
           Searches every hospital on LifeBridge for this patient. Every search is recorded in the audit log.
         </p>
