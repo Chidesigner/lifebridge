@@ -76,10 +76,10 @@ function UploadRecord() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="app-shell min-h-screen">
       <HospitalNav />
 
-      <main className="mx-auto max-w-2xl p-8">
+      <main className="page-content mx-auto max-w-2xl p-8">
         <h1 className="text-xl font-semibold text-brand-navy">Upload Patient Record</h1>
         <p className="mt-1 text-sm text-gray-500">
           This record will be visible to every verified hospital that searches this patient's NIN.
