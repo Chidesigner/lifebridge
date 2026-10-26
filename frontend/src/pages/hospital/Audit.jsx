@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { ClipboardList } from 'lucide-react'
+import { ClipboardList, ShieldCheck } from 'lucide-react'
 import { supabase } from '../../lib/supabaseClient'
 import { useAuth } from '../../context/AuthContext'
 import HospitalNav from '../../components/HospitalNav'
@@ -34,7 +34,8 @@ function Audit() {
     <div className="app-shell min-h-screen">
       <HospitalNav />
       <main className="page-content p-8">
-        <h1 className="text-xl font-semibold text-brand-navy">Audit Log</h1>
+        <div className="page-eyebrow"><ShieldCheck size={13} /> ACCESS TRANSPARENCY</div>
+      <h1 className="text-xl font-semibold text-brand-navy">Your facility’s audit trail</h1>
         <p className="mt-1 text-sm text-gray-500">Every NIN your hospital has searched, and when.</p>
 
         {error && <div className="mt-4 rounded-md border border-brand-red/30 bg-red-50 px-3 py-2 text-sm text-brand-red">{error}</div>}
