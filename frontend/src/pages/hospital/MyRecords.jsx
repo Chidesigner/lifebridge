@@ -135,10 +135,10 @@ function MyRecords() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="app-shell min-h-screen">
       <HospitalNav />
 
-      <main className="p-8">
+      <main className="page-content p-8">
         <h1 className="text-xl font-semibold text-brand-navy">My Records</h1>
         <p className="mt-1 text-sm text-gray-500">
           Patient records your hospital has uploaded. NIN can't be changed after upload —
