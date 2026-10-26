@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import {
-  FileText, Search, ClipboardList, UploadCloud, ArrowRight,
+  FileText, Search, UploadCloud, ArrowRight,
   Activity, ShieldCheck, Clock3, ArrowUpRight
 } from 'lucide-react'
 import { supabase } from '../../lib/supabaseClient'
