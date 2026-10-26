@@ -65,7 +65,8 @@ export function AuthProvider({ children }) {
   }, [])
 
   async function logout() {
-    await supabase.auth.signOut()
+    const { error } = await supabase.auth.signOut()
+    return error ?? null
   }
 
   const value = {
