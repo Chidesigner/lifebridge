@@ -44,10 +44,10 @@ function Search() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="app-shell min-h-screen">
       <HospitalNav />
 
-      <main className="mx-auto max-w-2xl p-8">
+      <main className="page-content mx-auto max-w-2xl p-8">
         <h1 className="text-xl font-semibold text-brand-navy">Search by NIN</h1>
         <p className="mt-1 text-sm text-gray-500">
           Searches every hospital on LifeBridge for this patient. Every search is recorded in the audit log.
