@@ -700,3 +700,62 @@ a { text-decoration: none; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
 }
+
+
+/* Final layout refinements for workflow pages and responsive data-heavy views */
+.app-shell main.page-content { width: min(100%, 1060px); margin-right: auto; }
+.app-shell main form.rounded-lg {
+  padding: clamp(20px, 2.5vw, 32px);
+  border: 1px solid #e0e8ed;
+  border-radius: 20px;
+  background: #fff;
+  box-shadow: var(--shadow-soft);
+}
+.app-shell main form .grid { column-gap: 18px; row-gap: 16px; }
+.app-shell main form button[type="submit"] {
+  min-height: 46px;
+  padding: 0 20px;
+  background: linear-gradient(105deg, #0b776f, #10968a);
+  color: #fff;
+  box-shadow: 0 7px 17px rgba(15,148,136,.16);
+}
+.app-shell main form button[type="submit"]:not(:disabled):hover {
+  transform: translateY(-1px);
+  background: linear-gradient(105deg, #08645f, #0b8177);
+}
+.app-shell main .bg-brand-navy { background: #15364a; }
+.app-shell main .hover\\:bg-brand-navy-dark:hover { background: #0b1c2a; }
+.app-shell main .text-brand-navy { color: #15364a; }
+.app-shell main .text-brand-green-dark { color: #08776f; }
+.app-shell main .bg-brand-green { background: #0f9488; }
+.app-shell main .bg-brand-green-dark { background: #08776f; }
+.app-shell main .text-brand-red { color: #b63d43; }
+.app-shell main .border-brand-red\\/30 { border-color: #f0caca; }
+.app-shell main .rounded-full { border-radius: 999px; }
+.app-shell main .shadow-sm { box-shadow: 0 4px 14px rgba(20,41,59,.04); }
+.app-shell main .text-xs { font-size: 10px; }
+.app-shell main .text-sm { font-size: 12px; }
+.app-shell main .text-xl { font-size: 27px; letter-spacing: -.055em; }
+.app-shell main .text-2xl { font-size: 30px; letter-spacing: -.06em; }
+.app-shell main .p-8 { padding: 0; }
+.app-shell main .mt-4 { margin-top: 20px; }
+.app-shell main .mt-3 { margin-top: 16px; }
+.app-shell main .mt-1 { margin-top: 8px; }
+.app-shell main form .mt-6 { margin-top: 0; }
+.app-shell main form .relative { min-width: 0; }
+.app-shell main .text-red-50 { color: #b63d43; }
+.app-shell main .min-w-0 { min-width: 0; }
+.app-shell main .text-right { text-align: right; }
+.site-feature-index { display: block; margin-top: 21px; color: #9aabb3; font-size: 9px; font-weight: 800; letter-spacing: .13em; }
+.site-section-dark .site-section-heading h2 { color: #f7fbfc; }
+@media (max-width: 740px) {
+  .app-shell main.page-content { width: 100%; }
+  .app-shell main form.rounded-lg { padding: 18px; }
+  .app-shell main form .grid.grid-cols-2 { grid-template-columns: minmax(0, 1fr); }
+  .app-shell main table { min-width: 620px; }
+  .app-shell main .mt-6 { margin-top: 22px; }
+}
+@media (max-width: 480px) {
+  .app-shell main form .gap-3 { gap: 8px; }
+  .app-shell main form button { white-space: nowrap; }
+}
