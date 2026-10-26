@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
-import { ClipboardList, Search as SearchIcon } from 'lucide-react'
+import { ClipboardList, Search as SearchIcon, ShieldCheck } from 'lucide-react'
 import { supabase } from '../../lib/supabaseClient'
 import AdminNav from '../../components/AdminNav'
 import Spinner from '../../components/Spinner'
@@ -44,7 +44,8 @@ function AuditLog() {
     <div className="app-shell min-h-screen">
       <AdminNav />
       <main className="page-content p-8">
-        <h1 className="text-xl font-semibold text-brand-navy">System Audit Log</h1>
+        <div className="page-eyebrow"><ShieldCheck size={13} /> NETWORK OVERSIGHT</div>
+        <h1 className="text-xl font-semibold text-brand-navy">System audit trail</h1>
         <p className="mt-1 text-sm text-gray-500">Every NIN search across every hospital on LifeBridge.</p>
 
         <div className="relative mt-4 max-w-sm">
