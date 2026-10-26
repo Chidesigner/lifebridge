@@ -1,0 +1,129 @@
+@import url("https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Manrope:wght@400;500;600;700;800&display=swap");
+@import "tailwindcss";
+
+/*
+  LifeBridge design tokens.
+  Abyss / Deep / Lagoon are the three teals (dark → mid).
+  Seafoam is the light accent used on dark surfaces.
+  Champagne is the single "luxury" accent: used in small doses.
+*/
+@theme {
+  --color-abyss: #061c22;
+  --color-deep: #0b3540;
+  --color-lagoon: #14606b;
+  --color-seafoam: #8fe3cf;
+  --color-champagne: #c9a96e;
+  --color-champagne-deep: #9c7b3f;
+  --color-porcelain: #f3f6f6;
+  --color-hair: #dde6e8;
+  --color-ink: #0e2229;
+  --color-slate: #587078;
+  --color-coral: #c2493f;
+
+  /* kept so any older class names keep working */
+  --color-brand-navy: #0b3540;
+  --color-brand-navy-dark: #061c22;
+  --color-brand-green: #16a34a;
+  --color-brand-green-dark: #15803d;
+  --color-brand-red: #c2493f;
+  --color-brand-red-dark: #a53a31;
+
+  --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Newsreader", Georgia, serif;
+}
+
+html, body, #root { min-height: 100%; }
+body {
+  font-family: var(--font-sans);
+  background: var(--color-porcelain);
+  color: var(--color-ink);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+.font-display { font-weight: 450; letter-spacing: -0.015em; font-optical-sizing: auto; }
+::selection { background: var(--color-seafoam); color: var(--color-abyss); }
+:focus-visible { outline: 2px solid var(--color-lagoon); outline-offset: 2px; }
+
+/* ---------- reusable surfaces ---------- */
+.surface {
+  background: #fff;
+  border: 1px solid var(--color-hair);
+  border-radius: 22px;
+  box-shadow: 0 1px 2px rgba(6, 28, 34, 0.04), 0 18px 40px -22px rgba(6, 28, 34, 0.18);
+}
+.surface-hover { transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease; }
+.surface-hover:hover {
+  transform: translateY(-3px);
+  border-color: #c4d4d7;
+  box-shadow: 0 2px 4px rgba(6, 28, 34, 0.05), 0 26px 50px -22px rgba(6, 28, 34, 0.28);
+}
+.surface-dark {
+  position: relative;
+  overflow: hidden;
+  color: #e9f4f2;
+  border-radius: 22px;
+  background:
+    radial-gradient(120% 140% at 100% 0%, rgba(143, 227, 207, 0.22), transparent 55%),
+    radial-gradient(90% 120% at 0% 100%, rgba(201, 169, 110, 0.14), transparent 60%),
+    linear-gradient(145deg, #0b3540 0%, #061c22 100%);
+  box-shadow: 0 30px 60px -28px rgba(6, 28, 34, 0.6);
+}
+
+/* ---------- atmosphere ---------- */
+.grain::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.07;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+.grid-lines {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px);
+  background-size: 56px 56px;
+  -webkit-mask-image: radial-gradient(70% 70% at 60% 40%, #000 30%, transparent 100%);
+  mask-image: radial-gradient(70% 70% at 60% 40%, #000 30%, transparent 100%);
+}
+.glass {
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  box-shadow: 0 40px 80px -30px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+}
+.text-gold {
+  background: linear-gradient(120deg, #e6d3a6, #c9a96e 50%, #9c7b3f);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ---------- motion ---------- */
+@keyframes rise { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+@keyframes float-slow { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+@keyframes arc-dash { to { stroke-dashoffset: -400; } }
+@keyframes ring-pulse { 0% { transform: scale(.8); opacity: .55; } 100% { transform: scale(1.6); opacity: 0; } }
+@keyframes spin-slow { to { transform: rotate(360deg); } }
+@keyframes shimmer { 0% { background-position: -400px 0; } 100% { background-position: 400px 0; } }
+@keyframes toast-in { from { opacity: 0; transform: translateY(14px) scale(.97); } to { opacity: 1; transform: none; } }
+@keyframes dialog-in { from { opacity: 0; transform: scale(.95) translateY(8px); } to { opacity: 1; transform: none; } }
+@keyframes caret { 0%, 50% { opacity: 1; } 51%, 100% { opacity: 0; } }
+@keyframes pop-in { from { opacity: 0; transform: translateY(10px) scale(.98); } to { opacity: 1; transform: none; } }
+
+.hero-rise { opacity: 0; animation: rise .7s cubic-bezier(.2, .7, .2, 1) forwards; }
+.skeleton-line {
+  background: linear-gradient(90deg, #eaf0f1 25%, #f6f9f9 50%, #eaf0f1 75%);
+  background-size: 800px 100%;
+  animation: shimmer 1.4s infinite linear;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+  .hero-rise { opacity: 1; }
+}
+
+/* thin, quiet scrollbars inside the app */
+* { scrollbar-width: thin; scrollbar-color: #c4d4d7 transparent; }
