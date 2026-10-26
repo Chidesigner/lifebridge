@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import {
   ArrowRight, ArrowUpRight, Activity, ShieldCheck, Search, Building2,
   ClipboardCheck, HeartPulse, LockKeyhole, FileText, BadgeCheck,
-  Network, CheckCircle2, Stethoscope, Fingerprint, Clock3
+  Network, CheckCircle2, Fingerprint, Clock3
 } from 'lucide-react'
 
 const FEATURES = [
