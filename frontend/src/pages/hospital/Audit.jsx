@@ -31,9 +31,9 @@ function Audit() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="app-shell min-h-screen">
       <HospitalNav />
-      <main className="p-8">
+      <main className="page-content p-8">
         <h1 className="text-xl font-semibold text-brand-navy">Audit Log</h1>
         <p className="mt-1 text-sm text-gray-500">Every NIN your hospital has searched, and when.</p>
 
