@@ -726,13 +726,11 @@ a { text-decoration: none; }
   background: linear-gradient(105deg, #08645f, #0b8177);
 }
 .app-shell main .bg-brand-navy { background: #15364a; }
-.app-shell main .hover\\:bg-brand-navy-dark:hover { background: #0b1c2a; }
 .app-shell main .text-brand-navy { color: #15364a; }
 .app-shell main .text-brand-green-dark { color: #08776f; }
 .app-shell main .bg-brand-green { background: #0f9488; }
 .app-shell main .bg-brand-green-dark { background: #08776f; }
 .app-shell main .text-brand-red { color: #b63d43; }
-.app-shell main .border-brand-red\\/30 { border-color: #f0caca; }
 .app-shell main .rounded-full { border-radius: 999px; }
 .app-shell main .shadow-sm { box-shadow: 0 4px 14px rgba(20,41,59,.04); }
 .app-shell main .text-xs { font-size: 10px; }
@@ -743,7 +741,6 @@ a { text-decoration: none; }
 .app-shell main .mt-4 { margin-top: 20px; }
 .app-shell main .mt-3 { margin-top: 16px; }
 .app-shell main .mt-1 { margin-top: 8px; }
-.app-shell main form .mt-6 { margin-top: 0; }
 .app-shell main form .relative { min-width: 0; }
 .app-shell main .text-red-50 { color: #b63d43; }
 .app-shell main .min-w-0 { min-width: 0; }
