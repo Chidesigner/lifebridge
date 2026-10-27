@@ -16,8 +16,11 @@ create policy "hospitals_update_admin" on public.hospitals for update
 using ( exists (select 1 from public.admin_users a where a.user_id = auth.uid()) )
 with check ( exists (select 1 from public.admin_users a where a.user_id = auth.uid()) );
 
+-- A verified hospital can read only its OWN records directly. Other hospitals'
+-- records are reachable only through search_patient_by_nin(), which logs the search.
+-- (hardening.sql later replaces this policy with the same rule under a clearer name.)
 create policy "patient_records_select_verified" on public.patient_records for select
-using ( exists (select 1 from public.hospitals h where h.user_id = auth.uid() and h.is_verified = true) );
+using ( exists (select 1 from public.hospitals h where h.user_id = auth.uid() and h.hospital_id = patient_records.hospital_id and h.is_verified = true) );
 
 create policy "patient_records_insert_own_verified" on public.patient_records for insert
 with check ( exists (select 1 from public.hospitals h where h.user_id = auth.uid() and h.hospital_id = patient_records.hospital_id and h.is_verified = true) );

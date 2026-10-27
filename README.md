@@ -58,7 +58,8 @@ lifebridge/
 ## Local setup
 
 1. Create a Supabase project.
-2. In the Supabase SQL Editor, run `supabase/schema.sql`, then `supabase/rls.sql`.
+2. In the Supabase SQL Editor, run these files from the `supabase` folder, in this order:
+   `schema.sql`, `rls.sql`, `documents.sql`, `add-remarks.sql`, `hardening.sql`, `hardening-2.sql`.
 3. In Supabase → Authentication → Providers → Email, turn **off** "Confirm email."
 4. `cd frontend && npm install`
 5. Copy `.env.example` to `.env.local` and fill in your Supabase Project URL and anon key.
